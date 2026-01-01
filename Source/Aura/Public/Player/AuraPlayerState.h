@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "GameFramework/PlayerState.h"
 #include "AuraPlayerState.generated.h"
 
@@ -20,11 +21,12 @@ class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInte
 public:
 	AAuraPlayerState();
 	//让角色类（AAuraCharacterBase）符合 GAS 的规范，向引擎暴露 “能力系统组件” 的访问入口
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAuraAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
 protected:
 	UPROPERTY();
 	TObjectPtr<UAuraAbilitySystemComponent> AbilitySystemComponent;
+	
 	UPROPERTY();
 	TObjectPtr<UAttributeSet> AttributeSet;
 };
