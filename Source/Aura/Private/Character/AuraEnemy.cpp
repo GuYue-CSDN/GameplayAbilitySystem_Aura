@@ -15,7 +15,8 @@ AAuraEnemy::AAuraEnemy()
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility,ECR_Block);
 	
 	//初始化 AbilitySystemComponent（能力系统组件）
-	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");\
+	//开启 AbilitySystemComponent（ASC）网络同步的总开关
 	AbilitySystemComponent->SetIsReplicated(true);
 	//设置 GAS 中 “GameplayEffect（游戏玩法效果）” 的网络同步模式，核心作用是控制 “属性变化、效果持续状态” 等数据在客户端和服务器之间的同步规则
 	//让 GAS 的 Effect 以 “混合同步” 的方式在网络中传输
