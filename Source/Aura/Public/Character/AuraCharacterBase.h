@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "GameFramework/Character.h"
 #include "AuraCharacterBase.generated.h"
 
-class UAuraAbilitySystemComponent;
 class UAttributeSet;
 
 UCLASS()
@@ -18,7 +18,7 @@ class AURA_API AAuraCharacterBase : public ACharacter, public IAbilitySystemInte
 public:
 	AAuraCharacterBase();
 	//让角色类（AAuraCharacterBase）符合 GAS 的规范，向引擎暴露 “能力系统组件” 的访问入口
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAuraAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
 protected:
 	virtual void BeginPlay() override;

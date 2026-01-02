@@ -9,7 +9,6 @@
 #include "AuraPlayerState.generated.h"
 
 
-class UAuraAbilitySystemComponent;
 class UAttributeSet;
 /**
  * 
