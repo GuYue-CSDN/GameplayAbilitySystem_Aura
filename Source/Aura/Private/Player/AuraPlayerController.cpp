@@ -86,9 +86,11 @@ void AAuraPlayerController::BeginPlay()
 	check(AuraContext);
 	//通过LocalPlayer（本地玩家）获取增强输入子系统的实例（每个本地玩家对应一个子系统）。
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	//将AuraContext（自定义的 IMC 资产）激活，并设置优先级为 0（优先级数值越高，映射越优先）。
-	Subsystem->AddMappingContext(AuraContext, 0);
+	if(Subsystem)
+	{
+		//将AuraContext（自定义的 IMC 资产）激活，并设置优先级为 0（优先级数值越高，映射越优先）。
+		Subsystem->AddMappingContext(AuraContext, 0);
+	}
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
