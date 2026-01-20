@@ -27,4 +27,8 @@ protected:
 	//是一个可配置的 “即时游戏效果” 类（比如 “瞬间伤害”“瞬间治疗”）
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
+	
+	//是一个可配置的 “持续游戏效果” 类
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
 };
