@@ -14,6 +14,42 @@
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	FEffectProperties(){}
+
+	FGameplayEffectContextHandle EffectContextHandle;
+
+	UPROPERTY()
+	UAbilitySystemComponent* SourceASC = nullptr;
+
+	UPROPERTY()
+	AActor* SourceAvatarActor = nullptr;
+
+	UPROPERTY()
+	AController* SourceController = nullptr;
+
+	UPROPERTY()
+	ACharacter* SourceCharacter = nullptr;
+
+	UPROPERTY()
+	UAbilitySystemComponent* TargetASC = nullptr;
+
+	UPROPERTY()
+	AActor* TargetAvatarActor = nullptr;
+	
+	UPROPERTY()
+	AController* TargetController = nullptr;
+	
+	UPROPERTY()
+	ACharacter* TargetCharacter = nullptr;
+};
+
+
+
 /**
  * 
  */
@@ -26,6 +62,9 @@ public:
 	//GetLifetimeReplicatedProps是虚幻引擎的生命周期复制属性注册函数
 	//所有需要网络同步的 UObject 派生类（比如 AttributeSet）都必须重写这个函数，告诉引擎：哪些属性需要同步、以什么规则同步
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 	
 	//ReplicatedUsing = OnRep_Health：表示该变量需要在网络中同步，且当变量在客户端被同步更新时，会自动调用 OnRep_Health 函数
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes");
@@ -55,5 +94,6 @@ public:
 	
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
-	
+private:
+	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 };
