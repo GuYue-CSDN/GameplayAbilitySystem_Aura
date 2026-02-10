@@ -33,7 +33,7 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	EffectContextHandle.AddSourceObject(this);
 	
 	//生成效果规格（Spec）,效果规格包含了效果的所有参数（如伤害值、持续时间、叠加规则等）
-	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
+	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, ActorLevel, EffectContextHandle);
 	//ApplyGameplayEffectSpecToSelf()：将生成的效果规格应用到目标的 ASC 上，完成效果的施加（比如造成伤害、恢复生命值等）。
 	const FActiveGameplayEffectHandle ActiveEffectHandle = TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 	//管理无限时长效果
@@ -42,7 +42,6 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	{
 		ActiveEffectHandles.Add(ActiveEffectHandle, TargetASC);
 	}
-	
 }
 
 void AAuraEffectActor::OnOverlap(AActor* TargetActor)
