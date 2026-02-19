@@ -41,6 +41,12 @@ void AAuraEnemy::UnHighLightActor()
 void AAuraEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	InitAbilityActorInfo();
+}
+
+void AAuraEnemy::InitAbilityActorInfo()
+{
 	//初始化 AbilitySystemComponent（ASC）核心关联信息 的关键操作，作用是为 ASC 绑定「权威 Actor」和「拥有者 Actor」
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
