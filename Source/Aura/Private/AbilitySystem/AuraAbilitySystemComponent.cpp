@@ -3,10 +3,13 @@
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 
+#include "AuraGameplayTags.h"
+
 void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
 	//OnGameplayEffectAppliedDelegateToSelf：这是 GAS 内置的多播委托，当有游戏效果（Gameplay Effect）应用到当前 ASC 自身时，该委托会被自动广播。
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UAuraAbilitySystemComponent::EffectApplied);
+	
 }
 
 void UAuraAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* AbilitySystemComponent,
