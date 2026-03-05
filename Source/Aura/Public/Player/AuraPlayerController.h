@@ -39,6 +39,8 @@ private:
 	void CursorTrace();
 	IEnemyInterface* LastActor;
 	IEnemyInterface* ThisActor;
+	//定义一个FHitResult类型的变量CursorHit，用于存储鼠标光标射线检测的结果
+	FHitResult CursorHit;
 	
 	void AbilityInputTagPressed(FGameplayTag InputTag);
 	void AbilityInputTagReleased(FGameplayTag InputTag);
