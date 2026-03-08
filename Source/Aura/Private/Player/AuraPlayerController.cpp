@@ -132,7 +132,7 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		GetASC()->AbilityInputTagReleased(InputTag);
 	}
 	
-	if (bTargeting && !bShiftKeyDown)
+	if (!bTargeting && !bShiftKeyDown)
 	{
 		const APawn* ControlledPawn = GetPawn();
 		if (FollowTime <= ShortPressThreshold && ControlledPawn)
