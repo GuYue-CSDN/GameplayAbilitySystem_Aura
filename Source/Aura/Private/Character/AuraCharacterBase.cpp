@@ -27,6 +27,11 @@ UAuraAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() con
 	return AbilitySystemComponent;
 }
 
+UAnimMontage* AAuraCharacterBase::GetHitReactMontage_Implementation()
+{
+	return HitReactMontage;
+}
+
 void AAuraCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -64,6 +69,7 @@ void AAuraCharacterBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 
+//角色启动技能（Startup Abilities）的授予入口，负责在服务器上为角色初始化并授予所有配置好的启动技能。
 void AAuraCharacterBase::AddCharacterAbilities()
 {
 	UAuraAbilitySystemComponent* AuraASC = CastChecked<UAuraAbilitySystemComponent>(AbilitySystemComponent);

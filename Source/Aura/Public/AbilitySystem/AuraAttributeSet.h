@@ -68,6 +68,8 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	
+	////用于在游戏效果执行后，对生命值（Health）和法力值（Mana）进行合法性校验和约束
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 	
 	//用于构建一个Gameplay Tag 到静态属性获取函数的映射表
@@ -147,6 +149,14 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Mana, Category = "Vital Attributes");
 	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Mana);
+	
+	/*
+	* Meta Attributes
+	*/
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
+	
 	
 	//ReplicatedUsing = OnRep_Health：表示该变量需要在网络中同步，且当变量在客户端被同步更新时，会自动调用 OnRep_Health 函数
 	UFUNCTION()
