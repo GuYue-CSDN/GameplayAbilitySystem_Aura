@@ -86,6 +86,10 @@ void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 	}
 }
 
+
+//在游戏效果（Gameplay Effect）触发时，从 GAS 的回调数据（FGameplayEffectModCallbackData）中，提取并填充所有与 “来源 / 目标” 相关的关键上下文信息（ASC、Actor、Controller、Character）
+//并将其打包到 FEffectProperties 结构体中，供后续的属性修改、伤害处理、UI 反馈等逻辑使用。
+//将 GAS 框架的抽象数据（Effect Spec、ASC）转换为具体的游戏对象（Actor、Character、Controller）
 void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const
 {
 	// Source = causer of the effect, Target = target of the effect (owner of this AS)
