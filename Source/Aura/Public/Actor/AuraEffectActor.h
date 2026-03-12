@@ -48,7 +48,10 @@ protected:
 	void OnEndOverlap(AActor* TargetActor);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
-	bool bDestroyOnEffectRemoval = false;
+	bool bDestroyOnEffectApplication = false;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+	bool bApplyEffectsToEnemies = false;
 	
 	//是一个可配置的 “即时游戏效果” 类（比如 “瞬间伤害”“瞬间治疗”）
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
