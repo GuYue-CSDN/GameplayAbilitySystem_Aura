@@ -18,7 +18,7 @@ void UAuraProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Hand
 }
 
 //投射物技能（Projectile Spell）的核心生成逻辑，负责在服务器上生成投射物，并将预配置的伤害效果传递给它
-void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation, const FGameplayTag& SocketTag)
+void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation, const FGameplayTag& SocketTag, bool bOverridePitch, float PitchOverride)
 {
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
@@ -27,7 +27,10 @@ void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 		GetAvatarActorFromActorInfo(),
 		SocketTag);
 	FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
-		
+	if (bOverridePitch)
+	{
+		Rotation.Pitch = PitchOverride;
+	}
 		
 	FTransform SpawnTransform;
 	SpawnTransform.SetLocation(SocketLocation);
