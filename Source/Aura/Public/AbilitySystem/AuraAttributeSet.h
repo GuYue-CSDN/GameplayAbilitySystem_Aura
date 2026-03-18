@@ -179,6 +179,10 @@ public:
 	FGameplayAttributeData IncomingDamage;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
 	
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingXP;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingXP);
+	
 	
 	//ReplicatedUsing = OnRep_Health：表示该变量需要在网络中同步，且当变量在客户端被同步更新时，会自动调用 OnRep_Health 函数
 	UFUNCTION()
