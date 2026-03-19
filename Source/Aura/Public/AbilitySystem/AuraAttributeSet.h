@@ -72,6 +72,9 @@ public:
 	////用于在游戏效果执行后，对生命值（Health）和法力值（Mana）进行合法性校验和约束
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 	
+	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
+	
+	
 	//用于构建一个Gameplay Tag 到静态属性获取函数的映射表
 	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
 	
@@ -251,4 +254,7 @@ private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 	void ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const;
 	void SendXPEvent(const FEffectProperties& Props);
+	
+	bool bTopOffHealth = false;
+	bool bTopOffMana = false;
 };
