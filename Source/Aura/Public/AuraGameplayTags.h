@@ -56,8 +56,10 @@ public:
 	FGameplayTag Damage_Arcane;
 	FGameplayTag Damage_Physical;
 	
+	
 	FGameplayTag Abilities_Attack;
 	FGameplayTag Abilities_Summon;
+	FGameplayTag Abilities_None;
 	
 	FGameplayTag Abilities_HitReact;
 
@@ -71,6 +73,7 @@ public:
 	FGameplayTag Abilities_Type_None;
 	
 	FGameplayTag Abilities_Fire_FireBolt;
+	FGameplayTag Abilities_Lightning_Electrocute;
 	
 	FGameplayTag Cooldown_Fire_FireBolt;
 	
