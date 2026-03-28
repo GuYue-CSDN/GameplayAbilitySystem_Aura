@@ -319,6 +319,28 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	); 
 	
 	/*
+	 *Player Tags
+	 */
+	
+	GameplayTags.Player_Block_InputPressed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("Player.Block.InputPressed"),
+	FString("Tag for blocking player input pressed")
+	);
+	GameplayTags.Player_Block_InputHeld = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Player.Block.InputHeld"),
+		FString("Tag for blocking player input held")
+	);
+	GameplayTags.Player_Block_InputReleased = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Player.Block.InputReleased"),
+		FString("Tag for blocking player input released")
+	);
+	GameplayTags.Player_Block_CursorTrace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Player.Block.CursorTrace"),
+		FString("Tag for blocking cursor trace/raycasting")
+	);
+	
+	
+	/*
 	* Map of Damage Types to Resistances
 	*/
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Arcane, GameplayTags.Attributes_Resistance_Arcane);
@@ -333,5 +355,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Lightning, GameplayTags.Debuff_Stun);
 	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Physical, GameplayTags.Debuff_Physical);
 	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Fire, GameplayTags.Debuff_Burn);
+	
+	
 	
 }
