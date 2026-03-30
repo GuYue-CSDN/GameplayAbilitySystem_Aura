@@ -11,6 +11,7 @@
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Aura/Aura.h"
 #include "Components/DecalComponent.h"
 #include "Components/SplineComponent.h"
 #include "Input/AuraInputComponent.h"
@@ -103,9 +104,9 @@ void AAuraPlayerController::CursorTrace()
 		ThisActor = nullptr;
 		return;
 	}
-	
+	const ECollisionChannel TraceChannel = IsValid(MagicCircle) ? ECC_ExcludePlayers : ECC_Visibility;
 	//从 “鼠标光标位置” 向游戏世界发射一条射线，检测 “可见层” 的对象，并将结果存入CursorHit
-	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	GetHitResultUnderCursor(TraceChannel, false, CursorHit);
 	//判断射线是否 “命中了阻挡对象”，若未命中则直接返回（终止后续逻辑）
 	if (!CursorHit.bBlockingHit) return;
 	
