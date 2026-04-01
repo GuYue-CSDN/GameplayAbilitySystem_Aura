@@ -372,6 +372,14 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FString("Tag for blocking cursor trace/raycasting")
 	);
 	
+	/*
+	 *GameplayCues Tags
+	 */
+	
+	GameplayTags.GameplayCue_FireBlast = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	FName("GameplayCue.FireBlast"),
+	FString("FireBlast GameplayCue Tag")
+	);
 	
 	/*
 	* Map of Damage Types to Resistances
@@ -388,7 +396,5 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Lightning, GameplayTags.Debuff_Stun);
 	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Physical, GameplayTags.Debuff_Physical);
 	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Fire, GameplayTags.Debuff_Burn);
-	
-	
 	
 }
