@@ -7,6 +7,7 @@
 #include "AuraAbilitySystemComponent.generated.h"
 
 
+class ULoadScreenSaveGame;
 class UAuraAbilitySystemComponent;
 //广播游戏效果的资产标签（Asset Tags）。
 DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTags*/);
@@ -34,6 +35,8 @@ public:
 	FDeactivatePassiveAbility DeactivatePassiveAbility;
 	FActivatePassiveEffect ActivatePassiveEffect;
 	
+	
+	void AddCharacterAbilitiesFromSaveData(ULoadScreenSaveGame* SaveData);
 	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
 	void AddCharacterPassiveAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupPassiveAbilities);
 	
