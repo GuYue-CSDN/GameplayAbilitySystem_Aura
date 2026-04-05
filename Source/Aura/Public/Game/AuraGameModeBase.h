@@ -33,6 +33,9 @@ public:
 	
 	void TraveToMap(UMVVM_LoadSlot* Slot);
 	
+	void SaveWorldState(UWorld* World, const FString& DestinationMapAssetName = FString("")) const;
+	void LoadWorldState(UWorld* World) const;
+	
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<USaveGame> LoadScreenSaveGameClass;
 	

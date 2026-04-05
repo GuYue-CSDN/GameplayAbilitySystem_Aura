@@ -77,6 +77,16 @@ void AAuraGameModeBase::TraveToMap(UMVVM_LoadSlot* Slot)
 	UGameplayStatics::OpenLevelBySoftObjectPtr(Slot, Maps.FindChecked(Slot->GetMapName()));
 }
 
+void AAuraGameModeBase::SaveWorldState(UWorld* World, const FString& DestinationMapAssetName) const
+{
+	
+}
+
+void AAuraGameModeBase::LoadWorldState(UWorld* World) const
+{
+	
+}
+
 AActor* AAuraGameModeBase::ChoosePlayerStart_Implementation(AController* Player)
 {
 	UAuraGameInstance* AuraGameInstance = Cast<UAuraGameInstance>(GetGameInstance());
