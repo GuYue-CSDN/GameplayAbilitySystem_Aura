@@ -175,6 +175,11 @@ void AAuraCharacter::HideMagicCircle_Implementation()
 	}
 }
 
+void AAuraCharacter::SaveProgress_Implementation(const FName& CheckpointTag)
+{
+	
+}
+
 int32 AAuraCharacter::GetPlayerLevel_Implementation()
 {
 	const AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
