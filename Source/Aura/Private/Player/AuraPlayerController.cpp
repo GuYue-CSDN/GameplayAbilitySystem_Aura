@@ -17,6 +17,7 @@
 #include "Input/AuraInputComponent.h"
 #include "Interaction/EnemyInterface.h"
 #include "GameFramework/Character.h"
+#include "Interaction/HighlightInterface.h"
 #include "UI/Widget/DamageTextComponent.h"
 
 AAuraPlayerController::AAuraPlayerController()
@@ -94,12 +95,30 @@ void AAuraPlayerController::UpdateMagicCircleLocation()
 	}
 }
 
+void AAuraPlayerController::HighlightActor(AActor* InActor)
+{
+	if (IsValid(InActor) && InActor->Implements<UHighlightInterface>())
+	{
+		IHighlightInterface::Execute_HighLightActor(InActor);
+	}
+}
+
+void AAuraPlayerController::UnHighlightActor(AActor* InActor)
+{
+	if (IsValid(InActor) && InActor->Implements<UHighlightInterface>())
+	{
+		IHighlightInterface::Execute_UnHighLightActor(InActor);
+	}
+}
+
+
 void AAuraPlayerController::CursorTrace()
 {
 	if (GetASC() && GetASC()->HasMatchingGameplayTag(FAuraGameplayTags::Get().Player_Block_CursorTrace))
 	{
-		if (LastActor) LastActor->UnHighLightActor();
-		if (ThisActor) ThisActor->UnHighLightActor();
+		UnHighlightActor(LastActor);
+		UnHighlightActor(ThisActor);
+
 		LastActor = nullptr;
 		ThisActor = nullptr;
 		return;
@@ -111,55 +130,19 @@ void AAuraPlayerController::CursorTrace()
 	if (!CursorHit.bBlockingHit) return;
 	
 	LastActor = ThisActor;
-	////将 “射线命中的 Actor” 尝试转换为IEnemyInterface接口类型（即判断该 Actor 是否实现了 “敌人接口”）
-	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
-	
-	    /**
-		* Line trace from cursor. There are several scenarios:
-		* A. LastActor is null && ThisActor is null
-		*     - Do nothing
-		* B. LastActor is null && ThisActor is valid
-		*     - Highlight ThisActor
-		* C. LastActor is valid && ThisActor is null
-		*     - UnHighlight LastActor
-		* D. Both actors are valid, but LastActor != ThisActor
-		*     - UnHighlight LastActor, and Highlight ThisActor
-		* E. Both actors are valid, and are the same actor
-		*     - Do nothing
-		*/
-	
-	if (LastActor == nullptr)
+	if (IsValid(CursorHit.GetActor()) && CursorHit.GetActor()->Implements<UHighlightInterface>())
 	{
-		if (ThisActor != nullptr)
-		{
-			// Case B
-			ThisActor->HighLightActor();
-		}
-		else
-		{
-			// Case A - both are null, do nothing
-		}
+		ThisActor = CursorHit.GetActor();
 	}
-	else // LastActor is valid
+	else
 	{
-		if (ThisActor == nullptr)
-		{
-			// Case C
-			LastActor->UnHighLightActor();
-		}
-		else // both actors are valid
-		{
-			if (LastActor != ThisActor)
-			{
-				// Case D
-				LastActor->UnHighLightActor();
-				ThisActor->HighLightActor();
-			}
-			else
-			{
-				// Case E - do nothing
-			}
-		}
+		ThisActor = nullptr;
+	}
+	
+	if (LastActor != ThisActor)
+	{
+		UnHighlightActor(LastActor);
+		HighlightActor(ThisActor);
 	}
 	
 }
@@ -173,8 +156,15 @@ void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	
 	if (InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_LMB))
 	{
-		bTargeting = ThisActor ? true : false;
-		bAutoRunning = false;
+		if (IsValid(ThisActor))
+		{
+			TargetingStatus = ThisActor->Implements<UEnemyInterface>() ? ETargetingStatus::TargetingEnemy : ETargetingStatus::TargetingNonEnemy;
+			bAutoRunning = false;
+		}
+		else
+		{
+			TargetingStatus = ETargetingStatus::NotTargeting;
+		}
 	}
 	if (GetASC()) GetASC()->AbilityInputTagPressed(InputTag);
 }
@@ -199,7 +189,7 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		GetASC()->AbilityInputTagReleased(InputTag);
 	}
 	
-	if (!bTargeting && !bShiftKeyDown)
+	if (TargetingStatus != ETargetingStatus::TargetingEnemy && !bShiftKeyDown)
 	{
 		const APawn* ControlledPawn = GetPawn();
 		if (FollowTime <= ShortPressThreshold && ControlledPawn)
@@ -224,7 +214,7 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 			}
 		}
 		FollowTime = 0.f;
-		bTargeting = false;
+		TargetingStatus = ETargetingStatus::NotTargeting;
 	}
 }
 
@@ -243,7 +233,7 @@ void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 		return;
 	}
 
-	if (bTargeting || bShiftKeyDown)
+	if (TargetingStatus == ETargetingStatus::TargetingEnemy || bShiftKeyDown)
 	{
 		if (GetASC())
 		{
