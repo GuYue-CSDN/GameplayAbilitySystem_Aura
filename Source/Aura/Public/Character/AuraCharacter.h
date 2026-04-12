@@ -19,6 +19,8 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase, public IPlayerInterfa
 	GENERATED_BODY()
 public:
 	AAuraCharacter();
+	
+	//初始化InitAbilityActorInfo函数的地方。
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 	

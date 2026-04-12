@@ -28,6 +28,7 @@ public:
 	/** Highlight Interface */
 	virtual void HighLightActor_Implementation() override;
 	virtual void UnHighLightActor_Implementation() override;
+	virtual void SetMoveToLocation_Implementation(FVector& OutDestination) override;
 	virtual void SetCombatTarget_Implementation(AActor* InCombatTarget) override;
 	virtual AActor* GetCombatTarget_Implementation() const override;
 	/** end Highlight Interface */
@@ -53,6 +54,8 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, Category = "Combat")
 	TObjectPtr<AActor> CombatTarget;
+	
+	void SetLevel(int32 InLevel) { Level = InLevel; }
 	
 protected:
 	virtual void BeginPlay() override;

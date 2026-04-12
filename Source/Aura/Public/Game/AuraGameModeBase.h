@@ -51,6 +51,8 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TMap<FString, TSoftObjectPtr<UWorld>> Maps;
 	
+	FString GetMapNameFromMapAssetName(const FString& MapAssetName) const;
+	
 	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
 	
 protected:

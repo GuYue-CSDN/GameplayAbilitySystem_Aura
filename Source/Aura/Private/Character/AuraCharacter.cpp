@@ -56,7 +56,7 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	
-	//Init ability actor info for the Server
+	//Init ability actor info for the 服务器
 	InitAbilityActorInfo();
 	LoadProgress();
 	
@@ -106,7 +106,7 @@ void AAuraCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 	
-	//Init ability actor info for the Client
+	//Init ability actor info for the 客户端
 	InitAbilityActorInfo();
 }
 
