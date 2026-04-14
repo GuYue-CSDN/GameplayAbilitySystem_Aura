@@ -17,22 +17,22 @@ FString UAuraFireBolt::GetDescription(int32 Level)
 	{
 		return FString::Printf(TEXT(
 			//Title
-			"<Title>FIRE BOLT: </>\n\n"
+			"<Title>火球术: </>\n\n"
 			
 			//Level
-			"<Small>Level: </><Level>%d</>\n"
+			"<Small>等级: </><Level>%d</>\n"
 			
 			//ManaCost
-			"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			"<Small>法力消耗: </><ManaCost>%.1f</>\n"
 			
 			//Cooldown
-			"<Small>Cooldown: </><Cooldown>%.1f</>\n\n"
+			"<Small>冷却时间: </><Cooldown>%.1f</>\n\n"
 			
-			"<Default>Launches a bolt of fire, "
-			"exploding on impact and dealing: </>"
+			"<Default>发射一个火球, "
+			"在撞击后爆炸: </>"
 			
 			//Damage
-			"<Damage>%d</><Default> fire damage with a chance to burn</>"), 
+			"<Damage>%d</><Default> 火焰伤害并且概率点燃敌人</>"), 
 			
 			//Values
 			Level,
@@ -44,22 +44,22 @@ FString UAuraFireBolt::GetDescription(int32 Level)
 	{
 		return FString::Printf(TEXT(
 			//Title
-			"<Title>FIRE BOLT: </>\n\n"
+			"<Title>火球术: </>\n\n"
 			
 			//Level
-			"<Small>Level: </><Level>%d</>\n"
+			"<Small>等级: </><Level>%d</>\n"
 			
 			//ManaCost
-			"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			"<Small>法力消耗: </><ManaCost>%.1f</>\n"
 			
 			//Cooldown
-			"<Small>Cooldown: </><Cooldown>%.1f</>\n\n"
+			"<Small>冷却时间: </><Cooldown>%.1f</>\n\n"
 			
-			"<Default>Launches %d bolts of fire, "
-			"exploding on impact and dealing: </>"
+			"<Default>发射 %d 个火球, "
+			"在撞击后爆炸: </>"
 			
 			//Damage
-			"<Damage>%d</><Default> fire damage with a chance to burn</>"), 
+			"<Damage>%d</><Default> 火焰伤害并且概率点燃敌人</>"), 
 			
 			//Values
 			Level,
@@ -78,22 +78,22 @@ FString UAuraFireBolt::GetNextLevelDescription(int32 Level)
 	
 	return FString::Printf(TEXT(
 			//Title
-			"<Title>NEXT LEVEL: </>\n\n"
+			"<Title>升级后: </>\n\n"
 			
 			//Level
-			"<Small>Level: </><Level>%d</>\n"
+			"<Small>等级: </><Level>%d</>\n"
 			
 			//ManaCost
-			"<Small>ManaCost: </><ManaCost>%.1f</>\n"
+			"<Small>法力消耗: </><ManaCost>%.1f</>\n"
 			
 			//Cooldown
-			"<Small>Cooldown: </><Cooldown>%.1f</>\n\n"
+			"<Small>冷却: </><Cooldown>%.1f</>\n\n"
 			
-			"<Default>Launches %d bolts of fire, "
-			"exploding on impact and dealing: </>"
+			"<Default>发射 %d 个火球, "
+			"在撞击后爆炸: </>"
 			
 			//Damage
-			"<Damage>%d</><Default> fire damage with a chance to burn</>"), 
+			"<Damage>%d</><Default> 火焰伤害并且概率点燃敌人</>"), 
 			
 			//Values
 			Level,
