@@ -156,9 +156,6 @@ Source/Aura/
 2. 首次打开会提示编译 C++ 模块，等待编译完成  
 3. 在编辑器中运行默认关卡（或从 LoadMenu 进入）  
 
-> 建议只同步：`Content`、`Config`、`Source`、`Plugins`（如有）、`Platforms`（如有）、`*.uproject`。  
-> 不要提交：`Binaries`、`Intermediate`、`DerivedDataCache`、`Saved`。
-
 ---
 
 ## 核心类速览
